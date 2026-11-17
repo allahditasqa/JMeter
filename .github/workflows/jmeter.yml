@@ -22,8 +22,7 @@ jobs:
         run: |
           mkdir -p results
           jmeter -n -t test-plans/jsonplaceholder-load.jmx -Jthreads=3 -Jrampup=3 -Jduration=20 -l results/ci.jtl -j results/jmeter.log -e -o reports/ci > results/stdout.txt 2>&1 || {
-            echo "::error::JMeter failed: $(tail -n 15 results/stdout.txt results/jmeter.log 2>/dev/null | tr '
-' ' ' | cut -c1-1500)"
+            echo "::error::JMeter failed: $(tail -n 15 results/stdout.txt results/jmeter.log 2>/dev/null | head -c 1500 | sed 's/$/ | /' | tr -d '\n')"
             exit 1
           }
       - uses: actions/upload-artifact@v4
