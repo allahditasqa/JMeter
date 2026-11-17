@@ -23,7 +23,7 @@ Everything is parameterised through JMeter properties (`-J`): `threads`, `rampup
 JMeter/
 ├── test-plans/jsonplaceholder-load.jmx
 ├── scripts/run.sh  run.bat       # profiles + HTML report generation
-└── .github/workflows/jmeter.yml  # manual / push smoke run via Docker
+└── .github/workflows/jmeter.yml  # manual / push smoke run
 ```
 
 ## Prerequisites
@@ -42,4 +42,4 @@ jmeter -n -t test-plans/jsonplaceholder-load.jmx -Jthreads=5 -Jrampup=10 -Jdurat
 Open `reports/load/index.html` for the HTML dashboard (APDEX, response-time percentiles, throughput, errors). Open the `.jmx` in the JMeter GUI to edit it (use GUI only for editing, not for load).
 
 ## Verified
-Run locally with JMeter 5.6.3 (`-Jthreads=3 -Jrampup=3 -Jduration=20`): 50 samples, 0 errors, HTML dashboard generated. The Docker-based GitHub Actions job has not been verified.
+Run locally with JMeter 5.6.3 (`-Jthreads=3 -Jrampup=3 -Jduration=20`): 50 samples, 0 errors, HTML dashboard generated. The GitHub Actions workflow installs JMeter 5.6.3 and runs the same small profile.

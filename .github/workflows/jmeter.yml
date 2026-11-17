@@ -8,13 +8,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - name: Run JMeter (small load) via Docker
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - name: Install JMeter 5.6.3
+        run: |
+          curl -sSLo jmeter.zip https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.zip
+          unzip -q jmeter.zip
+          echo "$PWD/apache-jmeter-5.6.3/bin" >> "$GITHUB_PATH"
+      - name: Run small load test
         run: |
           mkdir -p results
-          docker run --rm -v "$PWD:/work" -w /work justb4/jmeter:5.5 \
-            -n -t test-plans/jsonplaceholder-load.jmx \
-            -Jthreads=3 -Jrampup=3 -Jduration=20 \
-            -l results/ci.jtl -e -o reports/ci
+          jmeter -n -t test-plans/jsonplaceholder-load.jmx -Jthreads=3 -Jrampup=3 -Jduration=20 -l results/ci.jtl -e -o reports/ci
       - uses: actions/upload-artifact@v4
         if: always()
         with:
