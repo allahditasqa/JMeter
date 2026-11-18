@@ -1,0 +1,56 @@
+[
+  {
+    "RunId": "20261118-143114",
+    "StartedAt": "2026-11-18T09:31:14.608Z",
+    "DurationSeconds": 59.7,
+    "Modules": [
+      {
+        "Module": "Smoke",
+        "ReportPath": "smoke/Smoke test 18-11-2026_14-31-14.html",
+        "CsvPath": "smoke/Smoke test cases 18-11-2026_14-31-14.csv",
+        "Total": 5,
+        "Passed": 5,
+        "Failed": 0,
+        "Skipped": 0,
+        "DurationSeconds": 25
+      },
+      {
+        "Module": "Load",
+        "ReportPath": "load/Load test 18-11-2026_14-31-14.html",
+        "CsvPath": "load/Load test cases 18-11-2026_14-31-14.csv",
+        "Total": 3,
+        "Passed": 3,
+        "Failed": 0,
+        "Skipped": 0,
+        "DurationSeconds": 27.9
+      }
+    ]
+  },
+  {
+    "RunId": "20261118-143011",
+    "StartedAt": "2026-11-18T09:30:11.327Z",
+    "DurationSeconds": 51.1,
+    "Modules": [
+      {
+        "Module": "Smoke",
+        "ReportPath": "smoke/Smoke test 18-11-2026_14-30-11.html",
+        "CsvPath": "smoke/Smoke test cases 18-11-2026_14-30-11.csv",
+        "Total": 5,
+        "Passed": 4,
+        "Failed": 1,
+        "Skipped": 0,
+        "DurationSeconds": 17.4
+      },
+      {
+        "Module": "Load",
+        "ReportPath": "load/Load test 18-11-2026_14-30-11.html",
+        "CsvPath": "load/Load test cases 18-11-2026_14-30-11.csv",
+        "Total": 3,
+        "Passed": 3,
+        "Failed": 0,
+        "Skipped": 0,
+        "DurationSeconds": 28.1
+      }
+    ]
+  }
+]

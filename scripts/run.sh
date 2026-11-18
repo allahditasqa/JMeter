@@ -10,7 +10,7 @@ esac
 OUT="results/${PROFILE}"
 rm -rf "$OUT" "reports/${PROFILE}"
 mkdir -p results reports
-jmeter -n -t test-plans/jsonplaceholder-load.jmx \
+jmeter -n -t test-plans/load.jmx \
   -Jthreads=$THREADS -Jrampup=$RAMPUP -Jduration=$DURATION \
   -l "${OUT}.jtl" -e -o "reports/${PROFILE}"
 echo "HTML report: reports/${PROFILE}/index.html"

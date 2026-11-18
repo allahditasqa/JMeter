@@ -1,5 +1,3 @@
-results/
-reports/
 *.jtl
 jmeter.log
 .env
