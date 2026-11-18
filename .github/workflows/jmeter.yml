@@ -1,4 +1,4 @@
-name: JMeter Smoke
+name: JMeter
 on:
   workflow_dispatch:
   push:
@@ -12,21 +12,20 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Traceability check (documents, master CSV, plans)
+        run: node tools/docs.js check
       - name: Install JMeter 5.6.3
         run: |
           curl -sSLo jmeter.zip https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.zip
           unzip -q jmeter.zip
           chmod +x apache-jmeter-5.6.3/bin/jmeter apache-jmeter-5.6.3/bin/jmeter.sh
-          echo "$PWD/apache-jmeter-5.6.3/bin" >> "$GITHUB_PATH"
-      - name: Run small load test
-        run: |
-          mkdir -p results reports
-          jmeter -n -t test-plans/load.jmx -Jthreads=3 -Jrampup=3 -Jduration=20 -l results/ci.jtl -j results/jmeter.log -e -o reports/ci > results/stdout.txt 2>&1 || {
-            echo "::error::JMeter failed: $(tail -n 15 results/stdout.txt results/jmeter.log 2>/dev/null | head -c 1500 | sed 's/$/ | /' | tr -d '\n')"
-            exit 1
-          }
+      - name: Run both plans (short profile) and write the module-wise reports
+        run: JMETER="$PWD/apache-jmeter-5.6.3/bin/jmeter" node tools/run-jmeter.js
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: jmeter-report
+          name: jmeter-reports
           path: reports

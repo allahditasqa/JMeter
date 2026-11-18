@@ -37,9 +37,9 @@ JMeter/
 Equivalent raw command:
 ```bash
 jmeter -n -t test-plans/load.jmx -Jthreads=5 -Jrampup=10 -Jduration=60 \
-       -l results/load.jtl -e -o reports/load
+       -l results/load.jtl -e -o results/dashboard/load
 ```
-Open `reports/load/index.html` for the HTML dashboard (APDEX, response-time percentiles, throughput, errors). Open the `.jmx` in the JMeter GUI to edit it (use GUI only for editing, not for load).
+Open `results/dashboard/load/index.html` for the HTML dashboard (APDEX, response-time percentiles, throughput, errors). Open the `.jmx` in the JMeter GUI to edit it (use GUI only for editing, not for load).
 
 ## Verified
 Run locally with JMeter 5.6.3 (`-Jthreads=3 -Jrampup=3 -Jduration=20`): 50 samples, 0 errors, HTML dashboard generated. The GitHub Actions workflow installs JMeter 5.6.3 and runs the same small profile.

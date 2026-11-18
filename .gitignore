@@ -1,3 +1,4 @@
 *.jtl
 jmeter.log
 .env
+results/

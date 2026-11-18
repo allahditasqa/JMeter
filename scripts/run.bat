@@ -8,6 +8,6 @@ if "%PROFILE%"=="stress" (set THREADS=30 & set RAMPUP=30 & set DURATION=120)
 if exist results\%PROFILE%.jtl del results\%PROFILE%.jtl
 if exist reports\%PROFILE% rmdir /s /q reports\%PROFILE%
 if not exist results mkdir results
-if not exist reports mkdir reports
+if not exist resultsdashboard mkdir resultsdashboard
 jmeter -n -t test-plans\jsonplaceholder-load.jmx -Jthreads=%THREADS% -Jrampup=%RAMPUP% -Jduration=%DURATION% -l results\%PROFILE%.jtl -e -o reports\%PROFILE%
 echo HTML report: reports\%PROFILE%\index.html

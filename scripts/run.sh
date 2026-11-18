@@ -8,9 +8,9 @@ case "$PROFILE" in
   *) echo "profile must be load or stress"; exit 1 ;;
 esac
 OUT="results/${PROFILE}"
-rm -rf "$OUT" "reports/${PROFILE}"
-mkdir -p results reports
+rm -rf "$OUT" "results/dashboard/${PROFILE}"
+mkdir -p results/dashboard
 jmeter -n -t test-plans/load.jmx \
   -Jthreads=$THREADS -Jrampup=$RAMPUP -Jduration=$DURATION \
-  -l "${OUT}.jtl" -e -o "reports/${PROFILE}"
-echo "HTML report: reports/${PROFILE}/index.html"
+  -l "${OUT}.jtl" -e -o "results/dashboard/${PROFILE}"
+echo "JMeter dashboard: results/dashboard/${PROFILE}/index.html"
