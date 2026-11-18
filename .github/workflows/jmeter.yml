@@ -6,6 +6,7 @@ on:
 jobs:
   jmeter:
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-java@v4
@@ -19,7 +20,9 @@ jobs:
         run: node tools/docs.js check
       - name: Install JMeter 5.6.3
         run: |
-          curl -sSLo jmeter.zip https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.zip
+          for url in https://dlcdn.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip https://downloads.apache.org/jmeter/binaries/apache-jmeter-5.6.3.zip https://archive.apache.org/dist/jmeter/binaries/apache-jmeter-5.6.3.zip; do
+            curl -fsSL --max-time 120 --retry 2 -o jmeter.zip "$url" && unzip -tq jmeter.zip >/dev/null 2>&1 && break || echo "download from $url failed"
+          done
           unzip -q jmeter.zip
           chmod +x apache-jmeter-5.6.3/bin/jmeter apache-jmeter-5.6.3/bin/jmeter.sh
       - name: Run both plans (short profile) and write the module-wise reports
